@@ -1,4 +1,8 @@
+
+
 # Adversarial Attacks 
+<script type="text/javascript"
+src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeXAMS_HTML"></script>
 
 Deep learning has progressed exponentially and has allowed machines to perform tasks that far exceed human performance. However there are vulnerabilities in these models that can be exploited, rendering them extremely brittle. A whole new subfield in Deep learning has opened up which works towards finding possible attacks and developing full-proof defenses against the adversaries. This field is formally called "Adversarial Machine Learning" and has made important contributions to machine learning security. The aim of our blog is to demonstrate 3 contrastingly different adversarial attacks on neural networks, develop an intuition of the how they work and do an analysis of their severity under different settings.
 Adversarial attacks can broadly be divided into:
@@ -44,21 +48,34 @@ Watermark x with t
 
 The fowards step essentially causes a feature collision between the target and the poison instance. The forward step reduces the Frobenius distance between the poison instance and base class. Tuning $\beta$ influences how close the posioned instance looks to the base instance. Watermarking is used to strengthen the attacks. 
 
+
+![Decision Boundary](images/decision_b.png)
+<p align="center"><em>Decision boundary rotation in a clean label attack</em></p>
+
 ### One Shot Kill attacks on Transfer Learning tasks
 
-Transfer learning tasks are extremely vulnerable to clean label attacks. Infact even a single poisoned instance is capable of breaking the neural network during test time. It is common to use pre-trained networks as feature extractors with additonal layers added for a task. Popular architectures are used as pretrained networks and an adversary may have easy access to the model parameters. Here we use **Alex-Net** as a feature extractor and it is frozen during training. A final layer is added and is the only trainable part of the model. The model is trained to classify between instances of airplanes and automobiles. We use 800 training images (having equal number of airplanes and automobiles) and 100 test images. Automobiles are chosen as the base class and a particular instance is used as the base instance. We run the iterative optimization algorithm twice for every test instance, with and without the watermarking step. Our hyperparameters are set as follows:
+Transfer learning tasks are extremely vulnerable to clean label attacks. Infact even a single poisoned instance is capable of breaking the neural network during test time. It is common to use pre-trained networks as feature extractors with additonal layers added for a task. Popular architectures are used as pretrained networks and an adversary may have easy access to the model parameters. Here we use the CNN of  **Alex-Net** as a feature extractor and it is frozen during training. The dense network of Alex-Net is discarded.  
+
+![Alex Net](images/alex_net.png)
+<p align="center"><em>Alex-Net Architecture, We retain only the CNN portion</em></p>
+
+A final layer is added and is the only trainable part of the model. The model is trained to classify between instances of airplanes and automobiles. We use 800 training images (having equal number of airplanes and automobiles) and 100 test images. Automobiles are chosen as the base class and a particular instance is used as the base instance. We run the iterative optimization algorithm twice for every test instance, with and without the watermarking step. Our hyperparameters are set as follows:
 
 $\beta=16, \lambda = 10^{-4}$, Opacity for Watermarking =0.15, Total iterations = 1000
  
  We obtain the following results:
  Success rate without watermarking = 61%
  Success rate with watermarking = 96%
-
+The performance of the classifier is not compromised while injecting poison instances. The classification accuracy difference before and after poisoning is negligible and hence these attacks can go easily unnoticed. 
+Test accuracy of the classifier before poisoning = 97.4%
 Test accuracy of the classifier after poisoning = 97.1%
 
 Hence watermarking increases the intensity of the attacks. Moreover the task is done only over a single poisoned instance and multiple instances can further exacerbate the severity of the attacks. We show diferent examples of the base, target and poisoned instances below. 
 
 ![Clean Label attacks for different target instances](images/Poison.png)
+<p align="center"><em>Base, Target and Poisoned Instances in a one shot kill attack</em></p>
+
+
 
 
 
