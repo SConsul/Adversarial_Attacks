@@ -162,7 +162,26 @@ Algorithm:
 ![PGD_results2](images/PGD_results2.png)
 
 
- 
+
+## Exploratory Attacks
+
+Exploratory attacks happen after a model has been trained and is up and running. The aim of the attacker is to query the model and hence gain some information so as to train his own model to closely approximate the target model. For companies that provide ML-based services, this presents a tradeoff between the secrecy and the "explainibility" of the model. That is, for the assurance of proper feature selection, the companies need to disclose some metrics which can explain how the input of a model affects the output. However, revealing this information can quite often compromise the secrecy of the model, thus posing a danger to the companies intellectual property.
+
+Apart from this, if an accurate copy of a model is gotten hold of by an adversary, he can probe his own model for weaknesses and thus infer the same about the target. This can reduce the accuracy of the target over time as more and more adversaries get to know about the model's weaknesses.
+
+The metrics that companies give out for model comprehension often involves some heuristic or a function of the gradient of the output with respect to the input.
+
+### Problem Model 
+
+We assume in this project that the adversary has access to two kinds of queries :
+1. Membership queries
+2. Gradient queries (The gradient of the output of the model with respect to the input)
+
+We work on a classifier trained on the MNIST dataset.
+
+Based on the information obtained in response to the above queries, we train a 2 layer model that would seek to approximate the trained target clasifier.
+
+
 ## References
 
 [1] [Poison Frogs! Targeted Clean-Label Poisoning Attacks on Neural Networks” by Shafahi et. al at NeurIPS 2018](https://papers.nips.cc/paper/7849-poison-frogs-targeted-clean-label-poisoning-attacks-on-neural-networks.pdf)
