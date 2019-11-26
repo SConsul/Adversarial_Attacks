@@ -236,6 +236,9 @@ Because querying is the way a company provides an ML-based service, there is no 
 
 [1] [Poison Frogs! Targeted Clean-Label Poisoning Attacks on Neural Networks” by Shafahi et. al at NeurIPS 2018](https://papers.nips.cc/paper/7849-poison-frogs-targeted-clean-label-poisoning-attacks-on-neural-networks.pdf)
 
+[2] [Model Reconstruction from Model Explanations - Smitha Milli, Ludwig Schmidt, Anca D. Dragan, Moritz Hardt - 2018](https://arxiv.org/abs/1807.05185)
+
+
 
  
 
