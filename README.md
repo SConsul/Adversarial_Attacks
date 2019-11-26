@@ -206,20 +206,24 @@ In the case of training an MNIST classifier, we used cross entropy loss with an 
 #### Results with queries from training data :
 
 ![Table1 : Number of queries vs Accuracy](images/table1.png)
-Table1 : Number of queries vs Accuracy
+
+Table 1 : Number of queries vs Accuracy
 
 ![Graph1 : Number of queries vs Accuracy](images/graph1.png)
-Graph1 : Number of queries vs Accuracy
+
+Graph 1 : Number of queries vs Accuracy
 
 #### Results with queries chosen from Gaussian distrbution :
 
 It may be that the attacker does not have any access to the training data of the target model. He therefore queries on images chosen randomly from a Gaussian distribution with appropriate mean and variance. The results for this type of an attacker model are given below.
 
 ![Table2 : Number of queries vs Accuracy](images/table2.png)
-Table2 : Number of queries vs Accuracy
+
+Table 2 : Number of queries vs Accuracy
 
 ![Graph2 : Number of queries vs Accuracy](images/graph2.png)
-Graph2 : Number of queries vs Accuracy
+
+Graph 2 : Number of queries vs Accuracy
 
 ### Conclusion and defenses
 
