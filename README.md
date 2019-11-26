@@ -169,7 +169,8 @@ Exploratory attacks happen after a model has been trained and is up and running.
 
 Apart from this, if an accurate copy of a model is gotten hold of by an adversary, he can probe his own model for weaknesses and thus infer the same about the target. This can reduce the accuracy of the target over time as more and more adversaries get to know about the model's weaknesses.
 
-The metrics that companies give out for model comprehension often involves some heuristic or a function of the gradient of the output with respect to the input.
+The metrics that companies give out for model comprehension often involves some heuristic or a function of the gradient of the output with respect to the input. These heuristics (called saliency maps) are what expose this model to exploratory attacks.
+
 
 ### Problem Model 
 
@@ -179,7 +180,41 @@ We assume in this project that the adversary has access to two kinds of queries 
 
 We work on a classifier trained on the MNIST dataset.
 
-Based on the information obtained in response to the above queries, we train a 2 layer model that would seek to approximate the trained target clasifier.
+Based on the information obtained in response to the above queries, we train a 2 layer model that would seek to approximate the trained target classifier.
+
+### Membership query attack
+
+In this type of attack, we query the target on limited number of images picked from training data. Based on the response obtained, we train our neural network directly using stochastic gradient descent.
+
+In the case of training an MNIST classifier, we used cross entropy loss with a learning rate = 0.001 and momentum parameter set to 0.9. the number of training images that we assumed the attacker has access to was 10000 as opposed to the 60000 that were used to train the target.
+
+### Gradient query attack
+
+In this type of attack, we query the target on limited number of images picked from training data for both the output and its gradient. Based on the response obtained, we train our neural network directly using stochastic gradient descent.
+
+In the case of training an MNIST classifier, we used cross entropy loss with an additional term. This additional ternm was MeanSquareError(Grad(Target(x)), Grad(AttackerNeuralNet(x))). We took the learning rate to be 0.001 and momentum parameter to be 0.9. the number of training images that we assumed the attcker has access to was 10000 as opposed to the 60000 that were used to train the target.
+
+### Implementation and results
+
+1. Target Models : FCNN and CNN trained on the MNIST dataset
+
+2. Attacker Models : Two layer ReLU + Softmax neural network
+
+3. Maximum number of queries allowed : 10000
+
+
+#### Results with queries from training data :
+
+![Table1 : Number of queries vs Accuracy](images/table1.png)
+
+![Graph1 : Number of queries vs Accuracy](images/graph1.png)
+
+#### Results with queries chosen from Gaussian distrbution :
+
+![Table2 : Number of queries vs Accuracy](images/table2.png)
+
+![Graph2 : Number of queries vs Accuracy](images/graph2.png)
+
 
 
 ## References
