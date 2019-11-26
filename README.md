@@ -192,7 +192,7 @@ In the case of training an MNIST classifier, we used cross entropy loss with a l
 
 In this type of attack, we query the target on limited number of images picked from training data for both the output and its gradient. Based on the response obtained, we train our neural network directly using stochastic gradient descent.
 
-In the case of training an MNIST classifier, we used cross entropy loss with an additional term. This additional ternm was MeanSquareError(Grad(Target(x)), Grad(AttackerNeuralNet(x))). We took the learning rate to be 0.001 and momentum parameter to be 0.9. the number of training images that we assumed the attcker has access to was 10000 as opposed to the 60000 that were used to train the target.
+In the case of training an MNIST classifier, we used cross entropy loss with an additional term. This additional term was MeanSquareError(Grad(Target(x)), Grad(AttackerNeuralNet(x))). We took the learning rate to be 0.001 and momentum parameter to be 0.9. the number of training images that we assumed the attcker has access to was 10000 as opposed to the 60000 that were used to train the target.
 
 ### Implementation and results
 
@@ -206,15 +206,26 @@ In the case of training an MNIST classifier, we used cross entropy loss with an 
 #### Results with queries from training data :
 
 ![Table1 : Number of queries vs Accuracy](images/table1.png)
+Table1 : Number of queries vs Accuracy
 
 ![Graph1 : Number of queries vs Accuracy](images/graph1.png)
+Graph1 : Number of queries vs Accuracy
 
 #### Results with queries chosen from Gaussian distrbution :
 
+It may be that the attacker does not have any access to the training data of the target model. He therefore queries on images chosen randomly from a Gaussian distribution with appropriate mean and variance. The results for this type of an attacker model are given below.
+
 ![Table2 : Number of queries vs Accuracy](images/table2.png)
+Table2 : Number of queries vs Accuracy
 
 ![Graph2 : Number of queries vs Accuracy](images/graph2.png)
+Graph2 : Number of queries vs Accuracy
 
+### Conclusion and defenses
+
+Thus, we see that even without access to the training data of a model, an attacker can estimate a model well through just gradient queries.
+
+Because querying is the way a company provides an ML-based service, there is no real defense for this attack. The only precaution might be to limit the amount of gradient based information provided or encode the gradient information in a way that is provides a comprehension of the model as well as making it difficult for attackers to backtrack and work out the details of the gradient value itself.   
 
 
 ## References
