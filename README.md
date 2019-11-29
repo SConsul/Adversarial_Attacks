@@ -125,25 +125,13 @@ All code to implement the attacks can be found [here](https://github.com/SConsul
 
 
 ## Evasion Attacks: Adversarial Perturbations
-The premise of adversarial perturbations is that a small, visually imperceptible perturbation can be added to a model input that fools the model. For any pretrained model, adversarial perturbations can be easily engineered with just the gradient information. Fast Gradient Sign Method and Projected Gradient Descent are two such methods.
+The premise of adversarial perturbations is that a small, visually imperceptible perturbation can be added to a model input that fools the model. This has worrying implications in this age where deep learning is being relied for critical tasks such as self-driving cars and in security systems like facial recognition. We describe 2 white-box attacks (i.e. the attacker has access to the gradient information) that easily breaks state of the art networks.
 
 ### FGSM: Fast Gradient Sign Method
 The idea behind FGSM is very simple. For a classification task, shifting the input along the direction of the gradient of the cost function w.r.t input with a large enough step will shift the datapoint across the decision boundary and be misclassified by the network.
 
-<div style="text-align:center"><img src="images/FGSM.png" /></div>
-Applying the FGSM attack on a pretrained MNIST classifier with a LeNet architecture:
-we get the following results:
-![FGSM](images/FGSM.png)
-
-| Epsilon | Accuracy |  
-|:-------:|:--------:|
-|    0    |   0.981  |   
-|   0.05  |  0.9295  |   
-|   0.1   |  0.7637  |
-|   0.15  |  0.4555  |   
-|   0.2   |  0.1806  |   
-|   0.25  |  0.1806  |   
-|   0.3   |  0.0869  |   
+<div style="text-align:center"><img src="images/fgsm_step_diag.png" /></div>
+This is basically a single gradient ascent step with the perturbation step = ε. There is a trade off between drop in performance and perceptibility of the perturbation. 
 
 The salient features of FGSM are:
 - Extremely fast
@@ -151,15 +139,25 @@ The salient features of FGSM are:
 - ε has to be picked to trade-off between accuracy reduction and perceptibilty of the perturbation. 
 
 
-
 ### Results: Attacking LeNet trained on MNIST
+Applying the FGSM attack on a pretrained MNIST classifier with a LeNet architecture:
+we get the following results:
+![FGSM](images/FGSM_results.png)
 
-![FGSM_results](images/FGSM_results1.png)
+| Epsilon | Accuracy |  
+|:-------:|:--------:|
+|    0    |   0.981  |   
+|   0.05  |  0.9426  |   
+|   0.1   |  0.8510  |
+|   0.15  |  0.6826  |   
+|   0.2   |  0.4301  |   
+|   0.25  |  0.2082  |   
+|   0.3   |  0.0869  |   
 
-![FGSM_results](images/FGSM_result2.png)
+On datasets like ImageNet, FGSM has been shown to be able to generate visually imperceptible perturbations while breaking the state of the art models to almost 0% accuracy.
 
 ### PGD: Projected Gradient Descent
-
+The Projected Gradient Descent method follows the same logic as FGSM, but ensures that any stemp taken does not e
 - Perturbation maximizes model loss, keeping perturbation bounded by ε
 
 - Can be targeted (create confusion amongst specific labels) or untargeted
@@ -175,9 +173,17 @@ Algorithm:
 
 ### Results: Attacking LeNet trained on MNIST
 
-![PGD_results1](images/PGD_results1.png)
+![PGD_results](images/PGD_results.png)
 
-![PGD_results2](images/PGD_results2.png)
+| Epsilon | Accuracy |  
+|:-------:|:--------:|
+|    0    |   0.981  |   
+|   0.05  |  0.9295  |   
+|   0.1   |  0.7637  |
+|   0.15  |  0.4555  |   
+|   0.2   |  0.1806  |   
+|   0.25  |  0.1806  |   
+|   0.3   |  0.0869  |   
 
 
 
