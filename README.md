@@ -165,7 +165,8 @@ On datasets like ImageNet, FGSM has been shown to be able to generate visually i
 The Projected Gradient Descent method follows the same logic as FGSM, but lifts the constraint of a single step update. The attacker has no restriction in time to best attack which can be described as a *constrained optimization problem.* PGD maximizes the model loss, with the constraint that the perturbation is smaller than the specified ε. This is mathematically expressed as:
 ![PGD](images/PGD.png)
 
-This ε is to be chosen empirically such that the perturbation is not noticable.
+This ε is to be chosen empirically such that the perturbation is not noticable. At every update, the the step is projected back into the L_p ball around the sample.
+The L_p is a technical term to denote the space where all points are within ε distance (p-norm) from the sample. Projection of a point, z, into the L_p ball is simply finding the nearest point to z in the L_p ball.
 
 The PGD attack can be targeted (create confusion amongst specific labels) or untargeted (simply misclassify inputs). The algorithm is described as follows:
 1. Start from anywhere within L_p Ball around sample, X
@@ -189,7 +190,7 @@ The PGD attack can be targeted (create confusion amongst specific labels) or unt
 |   0.3   |  0.0869  |   
 
 
-
+The 
 ## Exploratory Attacks
 
 Exploratory attacks happen after a model has been trained and is up and running. The aim of the attacker is to query the model and hence gain some information so as to train his own model to closely approximate the target model. For companies that provide ML-based services, this presents a tradeoff between the secrecy and the "explainibility" of the model. That is, for the assurance of proper feature selection, the companies need to disclose some metrics which can explain how the input of a model affects the output. However, revealing this information can quite often compromise the secrecy of the model, thus posing a danger to the companies intellectual property.
