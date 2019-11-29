@@ -128,14 +128,29 @@ All code to implement the attacks can be found [here](https://github.com/SConsul
 The premise of adversarial perturbations is that a small, visually imperceptible perturbation can be added to a model input that fools the model. For any pretrained model, adversarial perturbations can be easily engineered with just the gradient information. Fast Gradient Sign Method and Projected Gradient Descent are two such methods.
 
 ### FGSM: Fast Gradient Sign Method
-The idea behind FGSM is very simple. For an input X, the perturbed input would be:
+The idea behind FGSM is very simple. For a classification task, shifting the input along the direction of the gradient of the cost function w.r.t input with a large enough step will shift the datapoint across the decision boundary and be misclassified by the network.
+
+<div style="text-align:center"><img src="images/FGSM.png" /></div>
+Applying the FGSM attack on a pretrained MNIST classifier with a LeNet architecture:
+we get the following results:
 ![FGSM](images/FGSM.png)
-<p align="center"><em></em></p>
+
+| Epsilon | Accuracy |  
+|:-------:|:--------:|
+|    0    |   0.981  |   
+|   0.05  |  0.9295  |   
+|   0.1   |  0.7637  |
+|   0.15  |  0.4555  |   
+|   0.2   |  0.1806  |   
+|   0.25  |  0.1806  |   
+|   0.3   |  0.0869  |   
+
+The salient features of FGSM are:
 - Extremely fast
 - No training required
-- Pick ε to trade-off between accuracy reduction and perceptibilty of the perturbation. 
+- ε has to be picked to trade-off between accuracy reduction and perceptibilty of the perturbation. 
 
-![FGSM](images/FGSM.png)
+
 
 ### Results: Attacking LeNet trained on MNIST
 
