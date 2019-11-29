@@ -3,8 +3,8 @@
 
 # Adversarial Attacks 
 
-
-Deep learning has progressed exponentially and has allowed machines to perform tasks that far exceed human performance. However there are vulnerabilities in these models that can be exploited, rendering them extremely brittle. A whole new subfield in Deep learning has opened up which works towards finding possible attacks and developing full-proof defenses against the adversaries. This field is formally called "Adversarial Machine Learning" and has made important contributions to machine learning security. The aim of our blog is to demonstrate 3 contrastingly different adversarial attacks on neural networks, develop an intuition of the how they work and do an analysis of their severity under different settings.
+Machine learning, in particular deep learning, has progressed exponentially and has allowed machines to perform tasks that far exceed human performance.With the successes of machine learning, it is easy to make the mistake of claiming that ML models are able to *understand* the data. In reality, machine learning, in its current form, is a *pattern recognition* system. This leads to the models having vulnerabilities that can be exploited, rendering them extremely brittle. A whole new subfield in Deep learning has opened up which works towards finding possible attacks and developing full-proof defenses against the adversaries. This field is formally called "Adversarial Machine Learning" and has made important contributions to machine learning security. 
+The aim of our blog is to demonstrate 3 contrastingly different adversarial attacks on neural networks, develop an intuition of the how they work and do an analysis of their severity under different settings.
 Adversarial attacks can broadly be divided into:
 
 - Poisoning attacks
@@ -124,13 +124,16 @@ To conclude the paper shows how flaws in neural networks can be exploited during
 All code to implement the attacks can be found [here](https://github.com/SConsul/Adversarial_Attacks/tree/master/Poison_attacks)
 
 
-## Adversarial Perturbations
+## Evasion Attacks: Adversarial Perturbations
+The premise of adversarial perturbations is that a small, visually imperceptible perturbation can be added to a model input that fools the model. For any pretrained model, adversarial perturbations can be easily engineered with just the gradient information. Fast Gradient Sign Method and Projected Gradient Descent are two such methods.
 
 ### FGSM: Fast Gradient Sign Method
-
+The idea behind FGSM is very simple. For an input X, the perturbed input would be:
+![FGSM](images/FGSM.png)
+<p align="center"><em></em></p>
 - Extremely fast
 - No training required
-- Trade-off between accuracy reduction and perceptibilty
+- Pick ε to trade-off between accuracy reduction and perceptibilty of the perturbation. 
 
 ![FGSM](images/FGSM.png)
 
