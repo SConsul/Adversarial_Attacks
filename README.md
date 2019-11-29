@@ -131,6 +131,8 @@ The premise of adversarial perturbations is that a small, visually imperceptible
 The idea behind FGSM is very simple. For a classification task, shifting the input along the direction of the gradient of the cost function w.r.t input with a large enough step will shift the datapoint across the decision boundary and be misclassified by the network.
 
 <div style="text-align:center"><img src="images/fgsm_step_diag.png" /></div>
+This is expressed by the equation:
+![FGSM](images/FGSM.png)
 This is basically a single gradient ascent step with the perturbation step = ε. There is a trade off between drop in performance and perceptibility of the perturbation. 
 
 The salient features of FGSM are:
@@ -142,7 +144,7 @@ The salient features of FGSM are:
 ### Results: Attacking LeNet trained on MNIST
 Applying the FGSM attack on a pretrained MNIST classifier with a LeNet architecture:
 we get the following results:
-![FGSM](images/FGSM_results.png)
+![FGSM_results](images/FGSM_result.png)
 
 | Epsilon | Accuracy |  
 |:-------:|:--------:|
@@ -157,23 +159,21 @@ we get the following results:
 On datasets like ImageNet, FGSM has been shown to be able to generate visually imperceptible perturbations while breaking the state of the art models to almost 0% accuracy.
 
 ### PGD: Projected Gradient Descent
-The Projected Gradient Descent method follows the same logic as FGSM, but ensures that any stemp taken does not e
-- Perturbation maximizes model loss, keeping perturbation bounded by ε
-
-- Can be targeted (create confusion amongst specific labels) or untargeted
-
+The Projected Gradient Descent method follows the same logic as FGSM, but lifts the constraint of a single step update. The attacker has no restriction in time to best attack which can be described as a *constrained optimization problem.* PGD maximizes the model loss, with the constraint that the perturbation is smaller than the specified ε. This is mathematically expressed as:
 ![PGD](images/PGD.png)
 
-Algorithm:
-1. Start from random perturbation within L_p Ball around sample
+This ε is to be chosen empirically such that the perturbation is not noticable.
+
+The PGD attack can be targeted (create confusion amongst specific labels) or untargeted (simply misclassify inputs). The algorithm is described as follows:
+1. Start from anywhere within L_p Ball around sample, X
 2. [UNTARGETED] Take gradient step along direction of max gradient of Loss(X,Y)
-3. [TARGETED] Take gradient step along in the negative direction of max gradient of Loss(X,Y_targeted)
-4. Project step back into L_p Ball
-5. Repeat steps 2,3
+   [TARGETED] Take gradient step along in the negative direction of max gradient of Loss(X,Y_targeted)
+3. Project step back into L_p Ball
+4. Repeat steps 2,3
 
 ### Results: Attacking LeNet trained on MNIST
 
-![PGD_results](images/PGD_results.png)
+![PGD_results](images/PGD_result.png)
 
 | Epsilon | Accuracy |  
 |:-------:|:--------:|
