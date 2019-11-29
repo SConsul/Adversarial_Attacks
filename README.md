@@ -190,7 +190,6 @@ The PGD attack can be targeted (create confusion amongst specific labels) or unt
 |   0.3   |  0.0869  |   
 
 
-The 
 ## Exploratory Attacks
 
 Exploratory attacks happen after a model has been trained and is up and running. The aim of the attacker is to query the model and hence gain some information so as to train his own model to closely approximate the target model. For companies that provide ML-based services, this presents a tradeoff between the secrecy and the "explainibility" of the model. That is, for the assurance of proper feature selection, the companies need to disclose some metrics which can explain how the input of a model affects the output. However, revealing this information can quite often compromise the secrecy of the model, thus posing a danger to the companies intellectual property.
@@ -264,7 +263,11 @@ Because querying is the way a company provides an ML-based service, there is no 
 
 [1] [Poison Frogs! Targeted Clean-Label Poisoning Attacks on Neural Networks” by Shafahi et. al at NeurIPS 2018](https://papers.nips.cc/paper/7849-poison-frogs-targeted-clean-label-poisoning-attacks-on-neural-networks.pdf)
 
-[2] [Model Reconstruction from Model Explanations - Smitha Milli, Ludwig Schmidt, Anca D. Dragan, Moritz Hardt - 2018](https://arxiv.org/abs/1807.05185)
+[2]  [Ian J. Goodfellow, Jonathon Shlens, and Christian Szegedy.  Explaining and harnessing adversarial examples, 2014](https://arxiv.org/abs/1412.6572)
+
+[3] [Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, and Adrian Vladu. Towards deep learning models resistant to adversarial attacks, 2017](https://arxiv.org/abs/1706.06083)
+
+[4] [Model Reconstruction from Model Explanations - Smitha Milli, Ludwig Schmidt, Anca D. Dragan, Moritz Hardt - 2018](https://arxiv.org/abs/1807.05185)
 
 
 
