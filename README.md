@@ -130,9 +130,11 @@ The premise of adversarial perturbations is that a small, visually imperceptible
 ### FGSM: Fast Gradient Sign Method
 The idea behind FGSM is very simple. For a classification task, shifting the input along the direction of the gradient of the cost function w.r.t input with a large enough step will shift the datapoint across the decision boundary and be misclassified by the network.
 
-<div style="text-align:center"><img src="images/fgsm_step_diag.png" /></div>
+![FGSM_Step](images/fgsm_step_diag.png)
 This is expressed by the equation:
+
 ![FGSM](images/FGSM.png)
+
 This is basically a single gradient ascent step with the perturbation step = ε. There is a trade off between drop in performance and perceptibility of the perturbation. 
 
 The salient features of FGSM are:
@@ -144,6 +146,7 @@ The salient features of FGSM are:
 ### Results: Attacking LeNet trained on MNIST
 Applying the FGSM attack on a pretrained MNIST classifier with a LeNet architecture:
 we get the following results:
+
 ![FGSM_results](images/FGSM_result.png)
 
 | Epsilon | Accuracy |  
