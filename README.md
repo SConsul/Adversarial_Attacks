@@ -167,6 +167,7 @@ The PGD attack can be targeted (create confusion amongst specific labels) or unt
 
 1. Start from anywhere within L<sub>p</sub> Ball around sample, X
 2. [UNTARGETED] Take gradient step along direction of max gradient of Loss(X,Y)
+
    [TARGETED] Take gradient step along in the negative direction of max gradient of Loss(X,Y_targeted)
 3. Project step back into L<sub>p</sub> Ball
 4. Repeat steps 2,3 till convergence
