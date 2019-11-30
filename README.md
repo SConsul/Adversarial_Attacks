@@ -126,7 +126,7 @@ The premise of adversarial perturbations is that a small, visually imperceptible
 ### FGSM: Fast Gradient Sign Method
 The idea behind FGSM is very simple. For a classification task, shifting the input along the direction of the gradient of the cost function w.r.t input with a large enough step will shift the datapoint across the decision boundary and be misclassified by the network.
 
-<p align="center"><img src="images/fgsm_step_diag.png" align="middle" width="180pt" height="100pt"/></p>
+<p align="center"><img src="images/fgsm_step_diag.png" align="middle" width="8cm" height="8cm"/></p>
 
 
 <p align="center"><img src="svgs/16e2663de5c0c9444d5b3d6a3824345e.svg" align="middle" width="183.19125pt" height="16.376943pt"/></p>
