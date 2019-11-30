@@ -270,6 +270,8 @@ Because querying is the way a company provides an ML-based service, there is no 
 
 The above methods are jsut a few of the many techniques developed to attack neural networks. The existence of attacks has prompted improvements in the both the data acquisition and network design for more robust models. The failures of NN has also led to ongoing research on why exactly do networks break. Some researchers have also pushed for a complete redesign to the learning approach, giving rise to interesting learning fields such as causal machine learning (pioneered by Judea Pearl).
 
+In this data-driven world, as deep learning is being increasingly widespread, we have to be careful to not confuse a machines pattern recognition with understanding and remember that they are not infallible. Proper backups and alternatives should be implemented to prevent catastrophic failure in critcal tasks like self-driving vehicles.
+
 ## References
 
 [1] [Poison Frogs! Targeted Clean-Label Poisoning Attacks on Neural Networks” by Shafahi et. al at NeurIPS 2018](https://papers.nips.cc/paper/7849-poison-frogs-targeted-clean-label-poisoning-attacks-on-neural-networks.pdf)
