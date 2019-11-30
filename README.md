@@ -129,7 +129,7 @@ The idea behind FGSM is very simple. For a classification task, shifting the inp
 ![FGSM_Step](images/fgsm_step_diag.png)
 This is expressed by the equation:
 
-![FGSM](images/FGSM.png)
+<p align="center"><img src="svgs/16e2663de5c0c9444d5b3d6a3824345e.svg" align="middle" width="183.19125pt" height="16.376943pt"/></p>
 
 This is basically a single gradient ascent step with the perturbation step = ε. There is a trade off between drop in performance and perceptibility of the perturbation. 
 
@@ -159,7 +159,7 @@ On datasets like ImageNet, FGSM has been shown to be able to generate visually i
 
 ### PGD: Projected Gradient Descent
 The Projected Gradient Descent method follows the same logic as FGSM, but lifts the constraint of a single step update. The attacker has no restriction in time to best attack which can be described as a *constrained optimization problem.* PGD maximizes the model loss, with the constraint that the perturbation is smaller than the specified ε. This is mathematically expressed as:
-![PGD](images/PGD.png)
+<p align="center"><img src="svgs/e56d17ab495927ff67545c5e8bc24600.svg" align="middle" width="182.6649pt" height="39.30498pt"/></p>
 
 This ε is to be chosen empirically such that the perturbation is not noticable. At every update, the the step is projected back into the L_p ball around the sample.
 The L_p is a technical term to denote the space where all points are within ε distance (p-norm) from the sample. Projection of a point, z, into the L_p ball is simply finding the nearest point to z in the L_p ball.
@@ -185,6 +185,7 @@ The PGD attack can be targeted (create confusion amongst specific labels) or unt
 |   0.25  |  0.1806  |   
 |   0.3   |  0.0869  |   
 
+<p align="center"><img src="svgs/1c9552ba9b387ae14ce4c3cc119227ee.svg" align="middle" width="198.46529999999998pt" height="39.30498pt"/></p>
 
 ## Exploratory Attacks
 
