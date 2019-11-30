@@ -39,13 +39,13 @@ Following is a iterative procedure to optimize the objective given previously:
 
 **Initialize** x:  <img src="svgs/62cd58813657e8f58c8c094968d1a4de.svg" align="center" width="49.27197pt" height="22.74591pt"/> 
 
-Define <img src="svgs/6dbe10c86a11f6d605f12ee6205d2a36.svg" align="center" width=167.803845pt height=26.70657pt/>
+Define <img src="svgs/6dbe10c86a11f6d605f12ee6205d2a36.svg" align="center" width="167.803845pt" height="26.70657pt"/>
 
 for i in 1 to total_iterations:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forward Step: <img src="svgs/e73b4c1761b4dfedaeeae0ec3df47ed0.svg" align="center" width=174.781695pt height=24.56553pt/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forward Step: <img src="svgs/e73b4c1761b4dfedaeeae0ec3df47ed0.svg" align="center" width="174.781695pt" height="24.56553pt"/>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Backward Step: <img src="svgs/43962c5f6741ac5f2f30cef7d9ac9841.svg" align="center" width=83.0511pt height=30.58869pt/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Backward Step: <img src="svgs/43962c5f6741ac5f2f30cef7d9ac9841.svg" align="center" width="83.0511pt" height="30.58869pt"/>
 
 end for
 
@@ -53,7 +53,7 @@ Watermark x with t
 
 ---
 
-The fowards step essentially causes a feature collision between the target and the poison instance. The forward step reduces the Frobenius distance between the poison instance and base class. Tuning <img src="svgs/8217ed3c32a785f0b5aad4055f432ad8.svg" align="center" width=10.1277pt height=22.74591pt/> influences how close the posioned instance looks to the base instance. Watermarking is used to strengthen the attacks. 
+The fowards step essentially causes a feature collision between the target and the poison instance. The forward step reduces the Frobenius distance between the poison instance and base class. Tuning <img src="svgs/8217ed3c32a785f0b5aad4055f432ad8.svg" align="center" width="10.1277pt" height="22.74591pt"/> influences how close the posioned instance looks to the base instance. Watermarking is used to strengthen the attacks. 
 
 
 ![Decision Boundary](images/decision_b.png)
@@ -68,7 +68,7 @@ Transfer learning tasks are extremely vulnerable to clean label attacks. Infact 
 
 A final layer is added and is the only trainable part of the model. The model is trained to classify between instances of airplanes and automobiles. We use 800 training images (having equal number of airplanes and automobiles) and 100 test images. Automobiles are chosen as the base class and a particular instance is used as the base instance. We run the iterative optimization algorithm twice for every test instance, with and without the watermarking step. Our hyperparameters are set as follows:
 
-<img src="svgs/05f4dcd71867cd7b633a58431e33345d.svg" align="center" width=120.230385pt height=26.70657pt/>, Opacity for Watermarking =0.15, Total iterations = 1000
+<img src="svgs/05f4dcd71867cd7b633a58431e33345d.svg" align="center" width="120.230385pt" height="26.70657pt"/>, Opacity for Watermarking =0.15, Total iterations = 1000
  
  We obtain the following results:
 
@@ -95,7 +95,7 @@ We investigate the effectiveness of the attacks in an end to end training scenar
 Unlike the previous case the feature extraction kernels weren't frozen. Initially the network was trained on the same dataset used in transfer learning. A target instance was picked and poison instances were generated using the iterative procedure. The model was retrained end to end on the poisoning instances + original train dataset.  Unlike the previous case where a single instance was used, here we generate 20 poison instances for a target instance.  Watermarking is used for every poison instance.
 Our hyperparameters are set as follows:
 
-<img src="svgs/05f4dcd71867cd7b633a58431e33345d.svg" align="center" width=120.230385pt height=26.70657pt/>, Opacity for Watermarking =0.2, Total iterations = 1000
+<img src="svgs/05f4dcd71867cd7b633a58431e33345d.svg" align="center" width="120.230385pt" height="26.70657pt"/>, Opacity for Watermarking =0.2, Total iterations = 1000
 
 Test accuracy of the classifier before poisoning = 92.4%
 
