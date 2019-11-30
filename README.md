@@ -61,10 +61,10 @@ The fowards step essentially causes a feature collision between the target and t
 
 ### One Shot Kill attacks on Transfer Learning tasks
 
-Transfer learning tasks are extremely vulnerable to clean label attacks. Infact even a single poisoned instance is capable of breaking the neural network during test time. It is common to use pre-trained networks as feature extractors with additonal layers added for a task. Popular architectures are used as pretrained networks and an adversary may have easy access to the model parameters. Here we use the CNN of  **Alex-Net** as a feature extractor and it is frozen during training. The dense network of Alex-Net is discarded.
+Transfer learning tasks are extremely vulnerable to clean label attacks. Infact even a single poisoned instance is capable of breaking the neural network during test time. It is common to use pre-trained networks as feature extractors with additonal layers added for a task. Popular architectures are used as pretrained networks and an adversary may have easy access to the model parameters. Here we use the CNN of  **AlexNet** as a feature extractor and it is frozen during training. The dense network of AlexNet is discarded.
 
-![Alex Net](images/alex_net.png)
-<p align="center"><em>Alex-Net Architecture, We retain only the CNN portion</em></p>
+![AlexNet](images/alex_net.png)
+<p align="center"><em>AlexNet Architecture, We retain only the CNN portion</em></p>
 
 A final layer is added and is the only trainable part of the model. The model is trained to classify between instances of airplanes and automobiles. We use 800 training images (having equal number of airplanes and automobiles) and 100 test images. Automobiles are chosen as the base class and a particular instance is used as the base instance. We run the iterative optimization algorithm twice for every test instance, with and without the watermarking step. Our hyperparameters are set as follows:
 
@@ -165,14 +165,14 @@ Thus PGD would allow the best possible ε-bounded perturbation be chosen.
 This ε is to be chosen empirically such that the perturbation is not noticable.
 The PGD attack can be targeted (create confusion amongst specific labels) or untargeted (simply misclassify inputs). The constrained optimization problem can be solved by using the PGD algorithm is described as follows:
 
-1. Start from anywhere within L<sub>p<\sub> Ball around sample, X
+1. Start from anywhere within L<sub>p</sub> Ball around sample, X
 2. [UNTARGETED] Take gradient step along direction of max gradient of Loss(X,Y)
    [TARGETED] Take gradient step along in the negative direction of max gradient of Loss(X,Y_targeted)
-3. Project step back into L<sub>p<\sub> Ball
+3. Project step back into L<sub>p</sub> Ball
 4. Repeat steps 2,3 till convergence
  
-At every update, the the step is projected back into the L<sub>p<\sub> ball around the sample.
-The L<sub>p<\sub> is a technical term to denote the space where all points are within ε distance (p-norm) from the sample. Projection of a point, z, into the L<sub>p<\sub> ball is simply finding the nearest point to z in the L<sub>p<\sub> ball.
+At every update, the the step is projected back into the L<sub>p</sub> ball around the sample.
+The L<sub>p</sub> is a technical term to denote the space where all points are within ε distance (p-norm) from the sample. Projection of a point, z, into the L<sub>p</sub> ball is simply finding the nearest point to z in the L<sub>p</sub> ball.
 For choice of p is not critical as for a finite dimensional space (such as most input spaces), the equivalence of norms ensures that tuning epsilon has the same effect as varying p.
 
 
