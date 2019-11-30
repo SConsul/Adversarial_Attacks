@@ -113,7 +113,7 @@ Poisoning attacks on end to end training are much more difficult to execute then
 
 ### Challenges 
 
-The major challenged faced by us while implementing this attack was tuning the hyperparameter for generating posioned instance. One configuration doesn't fit all the base instances. A higher <img src="svgs/8217ed3c32a785f0b5aad4055f432ad8.svg" align="center" width=10.1277pt height=22.74591pt/> can make the poisoned instance resemble the base class but can seperate the target and poison instance in the feature space. On the other hand a hihger learning rate will give good feature collisions but the poisoned instance will look nothing like the base class and hence can be easily detected. Tuning should be done keeping this tradeoff in mind. 
+The major challenged faced by us while implementing this attack was tuning the hyperparameter for generating posioned instance. One configuration doesn't fit all the base instances. A higher <img src="svgs/8217ed3c32a785f0b5aad4055f432ad8.svg" align="center" width="10.1277pt" height="22.74591pt"/> can make the poisoned instance resemble the base class but can seperate the target and poison instance in the feature space. On the other hand a hihger learning rate will give good feature collisions but the poisoned instance will look nothing like the base class and hence can be easily detected. Tuning should be done keeping this tradeoff in mind. 
 
 To conclude the paper shows how flaws in neural networks can be exploited during train time and calls for attention to the important issue of data reliability
 
