@@ -6,13 +6,11 @@
 Machine learning, in particular deep learning, has progressed exponentially and has allowed machines to perform tasks that far exceed human performance.With the successes of machine learning, it is easy to make the mistake of claiming that ML models are able to *understand* the data. In reality, machine learning, in its current form, is a *pattern recognition* system. This leads to the models having vulnerabilities that can be exploited, rendering them extremely brittle. A whole new subfield in Deep learning has opened up which works towards finding possible attacks and developing full-proof defenses against the adversaries. This field is formally called "Adversarial Machine Learning" and has made important contributions to machine learning security. 
 The aim of our blog is to demonstrate 3 contrastingly different adversarial attacks on neural networks, develop an intuition of the how they work and do an analysis of their severity under different settings.
 Adversarial attacks can broadly be divided into:
+- Poisoning attacks: wherein training data could be poisoned to ensure resultant model mishandles a targeted input
+- Evasion attacks: wherein a trained model is fooled by designed inputs
+- Exploratory attacks: wherein a trained model is mimicked by attackers
 
-- Poisoning attacks
-- Evasion attacks
-- Exploratory attacks
-
-We describe them one by one below:
-
+We describe each of them in detail below.
 
 
 ## Poisoning Attacks:
@@ -107,8 +105,6 @@ We obtain a success rate of 43% even with the watermarking. Shown below  is an e
 
 ![e2e examples](images/Poisone2e.png)
 <p align="center"><em>Poisoned images for attacks on end to end training</em></p>
-
-
 
  
 Poisoning attacks on end to end training are much more difficult to execute then on a transfer learning task. The first reason is that poisoning visibly worsens the performance of the classsifier at test time and can be detected. [1] shows that unlike the transfer learning scenario where the final layer decision boundary rotates to accommodate the poison instance within the base region, the decision boundary in the end-to-end training scenario is unchanged after retraining on the poisoned dataset. The observation that can be made is during retraining the lower layers of the network adjust such that the poison instances are projected back to the base class in the higher level feature space. Quoting the paper directly: 
