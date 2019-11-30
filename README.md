@@ -124,7 +124,7 @@ All code to implement the attacks can be found [here](https://github.com/SConsul
 The premise of adversarial perturbations is that a small, visually imperceptible perturbation can be added to a model input that fools the model. This has worrying implications in this age where deep learning is being relied for critical tasks such as self-driving cars and in security systems like facial recognition. We describe 2 white-box attacks (i.e. the attacker has access to the gradient information) that easily breaks state of the art networks.
 
 ### FGSM: Fast Gradient Sign Method
-The idea behind FGSM is very simple. For a classification task, shifting the input along the direction of the gradient of the cost function w.r.t input with a large enough step will shift the datapoint across the decision boundary and be misclassified by the network.
+First introduced in Goodfellow et.al's 2014 paper [2], the idea behind FGSM is very simple. For a classification task, shifting the input along the direction of the gradient of the cost function w.r.t input with a large enough step will shift the datapoint across the decision boundary and be misclassified by the network.
 
 <p align="center"><img src="images/fgsm_step_diag.png" align="middle" width="1080pt" height="1080pt"/></p>
 
@@ -158,8 +158,9 @@ Within a matter of seconds we are able to generate the the following results:
 On the MNIST data, of size 32x32 and of a single channel, the perturbation are visible to the eye and clearly increasing ε makes the perturbation more obvious. On datasets like ImageNet, with larger coloured images, FGSM has been shown to be able to generate visually imperceptible perturbations while breaking even the state of the art models to almost 0% accuracy.
 
 ### PGD: Projected Gradient Descent
-The Projected Gradient Descent method follows the same logic as FGSM, but lifts the constraint of a single step update. The attacker has no restriction in time to best attack which can be described as a *constrained optimization problem.* PGD maximizes the model loss, with the constraint that the perturbation is smaller than the specified ε. This is mathematically expressed as:
+The Projected Gradient Descent [3] method follows the same logic as FGSM, but lifts the constraint of a single step update.The attacker has no restriction in time to best attack which can be described as a *constrained optimization problem.* PGD maximizes the model loss, with the constraint that the perturbation,δ, is smaller than the specified ε. This is mathematically expressed as:
 <p align="center"><img src="svgs/e56d17ab495927ff67545c5e8bc24600.svg" align="middle" width="182.6649pt" height="39.30498pt"/></p>
+Thus PGD would allow the best possible ε-bounded perturbation be chosen.
 
 This ε is to be chosen empirically such that the perturbation is not noticable.
 The PGD attack can be targeted (create confusion amongst specific labels) or untargeted (simply misclassify inputs). The constrained optimization problem can be solved by using the PGD algorithm is described as follows:
@@ -172,11 +173,11 @@ The PGD attack can be targeted (create confusion amongst specific labels) or unt
  
 At every update, the the step is projected back into the L<sub>p<\sub> ball around the sample.
 The L<sub>p<\sub> is a technical term to denote the space where all points are within ε distance (p-norm) from the sample. Projection of a point, z, into the L<sub>p<\sub> ball is simply finding the nearest point to z in the L<sub>p<\sub> ball.
-
+For choice of p is not critical as for a finite dimensional space (such as most input spaces), the equivalence of norms ensures that tuning epsilon has the same effect as varying p.
 
 
 ### Results: Attacking LeNet trained on MNIST
-Attacking the same LeNet-5 by perturbing the MNIST dataset, we get the following results.:
+Attacking the same LeNet-5 by perturbing the MNIST dataset, we get the following results (for p=1):
 
 ![PGD_results](images/PGD_result.png)
 
@@ -193,9 +194,9 @@ Attacking the same LeNet-5 by perturbing the MNIST dataset, we get the following
 Again, the larger episilon means that greater perturbations are allowed and so the worse of the model can perform.
 
 ### Combating Adversarial Perturbations
-
+An effective way to combat adversarial perturbations is to add such perturbations to the training data. Adding PGD perturbations instead of random noise during the data augmentation step during training makes the model more robust. This method of training, termed 'Adversarial Training' can be described by the following equation:
 <p align="center"><img src="svgs/1c9552ba9b387ae14ce4c3cc119227ee.svg" align="middle" width="198.46529999999998pt" height="39.30498pt"/></p>
-
+Such models tend to outperform the normal classifier. This however comes with the cost of much higher training time.
 ## Exploratory Attacks
 
 Exploratory attacks happen after a model has been trained and is up and running. The aim of the attacker is to query the model and hence gain some information so as to train his own model to closely approximate the target model. For companies that provide ML-based services, this presents a tradeoff between the secrecy and the "explainibility" of the model. That is, for the assurance of proper feature selection, the companies need to disclose some metrics which can explain how the input of a model affects the output. However, revealing this information can quite often compromise the secrecy of the model, thus posing a danger to the companies intellectual property.
@@ -258,12 +259,16 @@ Table 2 : Number of queries vs Accuracy
 
 Graph 2 : Number of queries vs Accuracy
 
-### Conclusion and defenses
+### Defenses
 
 Thus, we see that even without access to the training data of a model, an attacker can estimate a model well through just gradient queries.
 
 Because querying is the way a company provides an ML-based service, there is no real defense for this attack. The only precaution might be to limit the amount of gradient based information provided or encode the gradient information in a way that is provides a comprehension of the model as well as making it difficult for attackers to backtrack and work out the details of the gradient value itself.   
 
+
+## Conclusion
+
+The above methods are jsut a few of the many techniques developed to attack neural networks. The existence of attacks has prompted improvements in the both the data acquisition and network design for more robust models. The failures of NN has also led to ongoing research on why exactly do networks break. Some researchers have also pushed for a complete redesign to the learning approach, giving rise to interesting learning fields such as causal machine learning (pioneered by Judea Pearl).
 
 ## References
 
